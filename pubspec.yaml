@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.6
   fluttertoast:
   get_storage:
+  exif:
+  image: ^4.1.7
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +65,13 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/images/Gisok-Gisok/
+    - assets/images/Guijo/
+    - assets/images/Hasselt_s Panau/
+    - assets/images/Mayapis/
+    - assets/images/Narig/
+    - assets/images/Quisumbing Guisok/
+    - assets/images/Yakal Saplungan/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
