@@ -39,6 +39,7 @@ dependencies:
   get_storage:
   exif:
   image: ^4.1.7
+  flutter_map:
 
 dev_dependencies:
   flutter_test:
