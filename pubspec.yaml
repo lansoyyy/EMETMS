@@ -40,6 +40,8 @@ dependencies:
   exif:
   image: ^4.1.7
   flutter_map:
+  image_picker:
+  tflite_v2:
 
 dev_dependencies:
   flutter_test:
