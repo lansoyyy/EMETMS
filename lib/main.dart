@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:emetms/screens/home_screen.dart';
+import 'package:emetms/screens/landing_screen.dart';
 import 'package:exif/exif.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -24,7 +25,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: HomeScreen(),
+      home: LandingScreen(),
     );
   }
 }

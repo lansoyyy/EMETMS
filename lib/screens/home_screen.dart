@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   context: context,
                   builder: (context) {
                     return SizedBox(
-                      height: 500,
+                      height: 510,
                       width: double.infinity,
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
@@ -47,8 +47,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             Center(
                               child: Image.asset(
-                                gisokgisok[i].image,
-                                height: 225,
+                                'assets/images/Gisok-Gisok/${gisokgisok[i].image}',
+                                height: 210,
                                 width: 225,
                               ),
                             ),
@@ -71,6 +71,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             TextWidget(
                               text:
                                   'Scientific Name: ${gisokgisok[i].scientificName}',
+                              fontSize: 14,
+                              fontFamily: 'Medium',
+                            ),
+                            TextWidget(
+                              text:
+                                  'ID No.: ${gisokgisok[i].image.split('.')[0]}',
                               fontSize: 14,
                               fontFamily: 'Medium',
                             ),
@@ -127,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Center(
                               child: Image.asset(
                                 'assets/images/Guijo/${guijo[i].image}',
-                                height: 225,
+                                height: 210,
                                 width: 225,
                               ),
                             ),
@@ -150,6 +156,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             TextWidget(
                               text:
                                   'Scientific Name: ${guijo[i].scientificName}',
+                              fontSize: 14,
+                              fontFamily: 'Medium',
+                            ),
+                            TextWidget(
+                              text: 'ID No.: ${guijo[i].image.split('.')[0]}',
                               fontSize: 14,
                               fontFamily: 'Medium',
                             ),
@@ -205,7 +216,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Center(
                               child: Image.asset(
                                 'assets/images/Hasselt_s Panau/${panau[i].image}',
-                                height: 225,
+                                height: 210,
                                 width: 225,
                               ),
                             ),
@@ -228,6 +239,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             TextWidget(
                               text:
                                   'Scientific Name: ${panau[i].scientificName}',
+                              fontSize: 14,
+                              fontFamily: 'Medium',
+                            ),
+                            TextWidget(
+                              text: 'ID No.: ${panau[i].image.split('.')[0]}',
                               fontSize: 14,
                               fontFamily: 'Medium',
                             ),
@@ -284,7 +300,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Center(
                               child: Image.asset(
                                 'assets/images/Mayapis/${mayapis[i].image}',
-                                height: 225,
+                                height: 210,
                                 width: 225,
                               ),
                             ),
@@ -307,6 +323,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             TextWidget(
                               text:
                                   'Scientific Name: ${mayapis[i].scientificName}',
+                              fontSize: 14,
+                              fontFamily: 'Medium',
+                            ),
+                            TextWidget(
+                              text: 'ID No.: ${mayapis[i].image.split('.')[0]}',
                               fontSize: 14,
                               fontFamily: 'Medium',
                             ),
@@ -363,7 +384,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Center(
                               child: Image.asset(
                                 'assets/images/Narig/${narig[i].image}',
-                                height: 225,
+                                height: 210,
                                 width: 225,
                               ),
                             ),
@@ -386,6 +407,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             TextWidget(
                               text:
                                   'Scientific Name: ${narig[i].scientificName}',
+                              fontSize: 14,
+                              fontFamily: 'Medium',
+                            ),
+                            TextWidget(
+                              text: 'ID No.: ${narig[i].image.split('.')[0]}',
                               fontSize: 14,
                               fontFamily: 'Medium',
                             ),
@@ -442,7 +468,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Center(
                               child: Image.asset(
                                 'assets/images/Yakal Saplungan/${yakal[i].image}',
-                                height: 225,
+                                height: 210,
                                 width: 225,
                               ),
                             ),
@@ -465,6 +491,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             TextWidget(
                               text:
                                   'Scientific Name: ${yakal[i].scientificName}',
+                              fontSize: 14,
+                              fontFamily: 'Medium',
+                            ),
+                            TextWidget(
+                              text: 'ID No.: ${yakal[i].image.split('.')[0]}',
                               fontSize: 14,
                               fontFamily: 'Medium',
                             ),
@@ -521,7 +552,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Center(
                               child: Image.asset(
                                 'assets/images/Quisumbing Guisok/${guisok[i].image}',
-                                height: 225,
+                                height: 210,
                                 width: 225,
                               ),
                             ),
@@ -544,6 +575,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             TextWidget(
                               text:
                                   'Scientific Name: ${guisok[i].scientificName}',
+                              fontSize: 14,
+                              fontFamily: 'Medium',
+                            ),
+                            TextWidget(
+                              text: 'ID No.: ${guisok[i].image.split('.')[0]}',
                               fontSize: 14,
                               fontFamily: 'Medium',
                             ),
@@ -585,11 +621,15 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(
-          Icons.camera_alt_outlined,
+      appBar: AppBar(
+        backgroundColor: Colors.blue,
+        foregroundColor: Colors.white,
+        centerTitle: true,
+        title: TextWidget(
+          text: 'Map',
+          fontSize: 18,
+          color: Colors.white,
         ),
-        onPressed: () {},
       ),
       body: hasLoaded
           ? FlutterMap(

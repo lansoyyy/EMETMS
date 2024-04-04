@@ -7,7 +7,7 @@ List<Species> gisokgisok = [
     description:
         'GISOK-GISOK is a small, smoothbarked, buttressed tree. It is medium-sized tree, up to 40 cm in diameter. Gisok-gisok is widely distributed in Luzon (Laguna, Quezon, Camarines and Albay); Catanduanes; Samar; Leyte; Biliran; Negros; Panay; Mindanao (Surigao, Agusan, Davao, Lanao, Zamboanga and Basilan).',
     family: 'Dipterocarpaceae',
-    image: 'assets/images/Gisok-Gisok/GG1.jpg',
+    image: 'GG1.jpg',
     latitude: 9.715106,
     longitude: 124.106846,
   ),
@@ -17,7 +17,7 @@ List<Species> gisokgisok = [
     description:
         'GISOK-GISOK is a small, smoothbarked, buttressed tree. It is medium-sized tree, up to 40 cm in diameter. Gisok-gisok is widely distributed in Luzon (Laguna, Quezon, Camarines and Albay); Catanduanes; Samar; Leyte; Biliran; Negros; Panay; Mindanao (Surigao, Agusan, Davao, Lanao, Zamboanga and Basilan).',
     family: 'Dipterocarpaceae',
-    image: 'assets/images/Gisok-Gisok/GG2.jpg',
+    image: 'GG2.jpg',
     latitude: 9.715101,
     longitude: 124.106848,
   ),
@@ -27,7 +27,7 @@ List<Species> gisokgisok = [
     description:
         'GISOK-GISOK is a small, smoothbarked, buttressed tree. It is medium-sized tree, up to 40 cm in diameter. Gisok-gisok is widely distributed in Luzon (Laguna, Quezon, Camarines and Albay); Catanduanes; Samar; Leyte; Biliran; Negros; Panay; Mindanao (Surigao, Agusan, Davao, Lanao, Zamboanga and Basilan).',
     family: 'Dipterocarpaceae',
-    image: 'assets/images/Gisok-Gisok/GG3.jpg',
+    image: 'GG3.jpg',
     latitude: 9.715101,
     longitude: 124.106852,
   ),
@@ -37,7 +37,7 @@ List<Species> gisokgisok = [
     description:
         'GISOK-GISOK is a small, smoothbarked, buttressed tree. It is medium-sized tree, up to 40 cm in diameter. Gisok-gisok is widely distributed in Luzon (Laguna, Quezon, Camarines and Albay); Catanduanes; Samar; Leyte; Biliran; Negros; Panay; Mindanao (Surigao, Agusan, Davao, Lanao, Zamboanga and Basilan).',
     family: 'Dipterocarpaceae',
-    image: 'assets/images/Gisok-Gisok/GG4.jpg',
+    image: 'GG4.jpg',
     latitude: 9.715170,
     longitude: 124.106876,
   ),
@@ -47,7 +47,7 @@ List<Species> gisokgisok = [
     description:
         'GISOK-GISOK is a small, smoothbarked, buttressed tree. It is medium-sized tree, up to 40 cm in diameter. Gisok-gisok is widely distributed in Luzon (Laguna, Quezon, Camarines and Albay); Catanduanes; Samar; Leyte; Biliran; Negros; Panay; Mindanao (Surigao, Agusan, Davao, Lanao, Zamboanga and Basilan).',
     family: 'Dipterocarpaceae',
-    image: 'assets/images/Gisok-Gisok/GG5.jpg',
+    image: 'GG5.jpg',
     latitude: 9.714454,
     longitude: 124.106959,
   ),
@@ -57,7 +57,7 @@ List<Species> gisokgisok = [
     description:
         'GISOK-GISOK is a small, smoothbarked, buttressed tree. It is medium-sized tree, up to 40 cm in diameter. Gisok-gisok is widely distributed in Luzon (Laguna, Quezon, Camarines and Albay); Catanduanes; Samar; Leyte; Biliran; Negros; Panay; Mindanao (Surigao, Agusan, Davao, Lanao, Zamboanga and Basilan).',
     family: 'Dipterocarpaceae',
-    image: 'assets/images/Gisok-Gisok/GG6.jpg',
+    image: 'GG6.jpg',
     latitude: 9.714285,
     longitude: 124.106902,
   ),
@@ -67,7 +67,7 @@ List<Species> gisokgisok = [
     description:
         'GISOK-GISOK is a small, smoothbarked, buttressed tree. It is medium-sized tree, up to 40 cm in diameter. Gisok-gisok is widely distributed in Luzon (Laguna, Quezon, Camarines and Albay); Catanduanes; Samar; Leyte; Biliran; Negros; Panay; Mindanao (Surigao, Agusan, Davao, Lanao, Zamboanga and Basilan).',
     family: 'Dipterocarpaceae',
-    image: 'assets/images/Gisok-Gisok/GG7.jpg',
+    image: 'GG7.jpg',
     latitude: 9.714859,
     longitude: 124.107162,
   ),
@@ -77,7 +77,7 @@ List<Species> gisokgisok = [
     description:
         'GISOK-GISOK is a small, smoothbarked, buttressed tree. It is medium-sized tree, up to 40 cm in diameter. Gisok-gisok is widely distributed in Luzon (Laguna, Quezon, Camarines and Albay); Catanduanes; Samar; Leyte; Biliran; Negros; Panay; Mindanao (Surigao, Agusan, Davao, Lanao, Zamboanga and Basilan).',
     family: 'Dipterocarpaceae',
-    image: 'assets/images/Gisok-Gisok/GG8.jpg',
+    image: 'GG8.jpg',
     latitude: 9.714891,
     longitude: 124.107164,
   ),
@@ -87,7 +87,7 @@ List<Species> gisokgisok = [
     description:
         'GISOK-GISOK is a small, smoothbarked, buttressed tree. It is medium-sized tree, up to 40 cm in diameter. Gisok-gisok is widely distributed in Luzon (Laguna, Quezon, Camarines and Albay); Catanduanes; Samar; Leyte; Biliran; Negros; Panay; Mindanao (Surigao, Agusan, Davao, Lanao, Zamboanga and Basilan).',
     family: 'Dipterocarpaceae',
-    image: 'assets/images/Gisok-Gisok/GG9.jpg',
+    image: 'GG9.jpg',
     latitude: 9.714982,
     longitude: 124.107197,
   ),
@@ -97,7 +97,7 @@ List<Species> gisokgisok = [
     description:
         'GISOK-GISOK is a small, smoothbarked, buttressed tree. It is medium-sized tree, up to 40 cm in diameter. Gisok-gisok is widely distributed in Luzon (Laguna, Quezon, Camarines and Albay); Catanduanes; Samar; Leyte; Biliran; Negros; Panay; Mindanao (Surigao, Agusan, Davao, Lanao, Zamboanga and Basilan).',
     family: 'Dipterocarpaceae',
-    image: 'assets/images/Gisok-Gisok/GG10.jpg',
+    image: 'GG10.jpg',
     latitude: 9.714982,
     longitude: 124.107192,
   ),
