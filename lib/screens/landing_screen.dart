@@ -67,19 +67,16 @@ class _LandingScreenState extends State<LandingScreen> {
   late String imageURL = '';
 
   getImageCamera(String imgsrc) async {
-    setState(() {
-      hasloaded = false;
-    });
     var tempStore = await ImagePicker().pickImage(
       source: imgsrc == 'camera' ? ImageSource.camera : ImageSource.gallery,
     );
 
     showToast('Loading...');
 
-    fileName = path.basename(pickedImage.path);
+    fileName = path.basename(tempStore!.path);
 
     await firebase_storage.FirebaseStorage.instance
-        .ref('Tree/${File(tempStore!.path).path}')
+        .ref('Tree/${File(tempStore.path).path}')
         .putFile(File(tempStore.path));
     imageURL = await firebase_storage.FirebaseStorage.instance
         .ref('Tree/${File(tempStore.path).path}')
@@ -252,7 +249,10 @@ class _LandingScreenState extends State<LandingScreen> {
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const HomeScreen()));
+                          builder: (context) => HomeScreen(
+                                lat: lat,
+                                long: long,
+                              )));
                     },
                     child: Container(
                       height: 250,

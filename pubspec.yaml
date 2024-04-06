@@ -47,6 +47,7 @@ dependencies:
   firebase_storage:
   firebase_auth:
   geolocator:
+  google_maps_flutter:
 
 dev_dependencies:
   flutter_test:

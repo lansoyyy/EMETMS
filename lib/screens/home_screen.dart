@@ -1,12 +1,22 @@
-import 'package:emetms/utlis/const.dart';
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:emetms/widgets/button_widget.dart';
 import 'package:emetms/widgets/text_widget.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart';
+
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  double lat;
+  double long;
+
+  HomeScreen({
+    super.key,
+    required this.lat,
+    required this.long,
+  });
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -16,640 +26,144 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    getTrees();
+
     super.initState();
   }
 
-  bool hasLoaded = false;
-
-  List<Marker> markers = [];
-
-  getTrees() {
-    for (int i = 0; i < gisokgisok.length; i++) {
-      markers.add(
-        Marker(
-            point: LatLng(gisokgisok[i].latitude, gisokgisok[i].longitude),
-            width: 35,
-            height: 35,
-            child: GestureDetector(
-              onTap: () {
-                showModalBottomSheet(
-                  context: context,
-                  builder: (context) {
-                    return SizedBox(
-                      height: 510,
-                      width: double.infinity,
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Center(
-                              child: Image.asset(
-                                'assets/images/Gisok-Gisok/${gisokgisok[i].image}',
-                                height: 210,
-                                width: 225,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            TextWidget(
-                              text: 'Name: ${gisokgisok[i].name}',
-                              fontSize: 18,
-                              fontFamily: 'Bold',
-                            ),
-                            const Divider(
-                              color: Colors.grey,
-                            ),
-                            TextWidget(
-                              text: 'Family: ${gisokgisok[i].family}',
-                              fontSize: 14,
-                              fontFamily: 'Medium',
-                            ),
-                            TextWidget(
-                              text:
-                                  'Scientific Name: ${gisokgisok[i].scientificName}',
-                              fontSize: 14,
-                              fontFamily: 'Medium',
-                            ),
-                            TextWidget(
-                              text:
-                                  'ID No.: ${gisokgisok[i].image.split('.')[0]}',
-                              fontSize: 14,
-                              fontFamily: 'Medium',
-                            ),
-                            TextWidget(
-                              text: 'Description: ${gisokgisok[i].description}',
-                              fontSize: 14,
-                              fontFamily: 'Medium',
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                );
-              },
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.green,
-                  shape: BoxShape.circle,
-                ),
-                child: Center(
-                  child: TextWidget(
-                    text: gisokgisok[i].name[0],
-                    fontSize: 18,
-                    fontFamily: 'Bold',
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            )),
-      );
-    }
-
-    for (int i = 0; i < guijo.length; i++) {
-      markers.add(
-        Marker(
-            point: LatLng(guijo[i].latitude, guijo[i].longitude),
-            width: 35,
-            height: 35,
-            child: GestureDetector(
-              onTap: () {
-                showModalBottomSheet(
-                  context: context,
-                  builder: (context) {
-                    return SizedBox(
-                      height: 500,
-                      width: double.infinity,
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Center(
-                              child: Image.asset(
-                                'assets/images/Guijo/${guijo[i].image}',
-                                height: 210,
-                                width: 225,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            TextWidget(
-                              text: 'Name: ${guijo[i].name}',
-                              fontSize: 18,
-                              fontFamily: 'Bold',
-                            ),
-                            const Divider(
-                              color: Colors.grey,
-                            ),
-                            TextWidget(
-                              text: 'Family: ${guijo[i].family}',
-                              fontSize: 14,
-                              fontFamily: 'Medium',
-                            ),
-                            TextWidget(
-                              text:
-                                  'Scientific Name: ${guijo[i].scientificName}',
-                              fontSize: 14,
-                              fontFamily: 'Medium',
-                            ),
-                            TextWidget(
-                              text: 'ID No.: ${guijo[i].image.split('.')[0]}',
-                              fontSize: 14,
-                              fontFamily: 'Medium',
-                            ),
-                            TextWidget(
-                              text: 'Description: ${guijo[i].description}',
-                              fontSize: 14,
-                              fontFamily: 'Medium',
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                );
-              },
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.blue,
-                  shape: BoxShape.circle,
-                ),
-                child: Center(
-                  child: TextWidget(
-                    text: guijo[i].name[0],
-                    fontSize: 18,
-                    fontFamily: 'Bold',
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            )),
-      );
-    }
-    for (int i = 0; i < panau.length; i++) {
-      markers.add(
-        Marker(
-            point: LatLng(panau[i].latitude, panau[i].longitude),
-            width: 35,
-            height: 35,
-            child: GestureDetector(
-              onTap: () {
-                showModalBottomSheet(
-                  context: context,
-                  builder: (context) {
-                    return SizedBox(
-                      height: 500,
-                      width: double.infinity,
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Center(
-                              child: Image.asset(
-                                'assets/images/Hasselt_s Panau/${panau[i].image}',
-                                height: 210,
-                                width: 225,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            TextWidget(
-                              text: 'Name: ${panau[i].name}',
-                              fontSize: 18,
-                              fontFamily: 'Bold',
-                            ),
-                            const Divider(
-                              color: Colors.grey,
-                            ),
-                            TextWidget(
-                              text: 'Family: ${panau[i].family}',
-                              fontSize: 14,
-                              fontFamily: 'Medium',
-                            ),
-                            TextWidget(
-                              text:
-                                  'Scientific Name: ${panau[i].scientificName}',
-                              fontSize: 14,
-                              fontFamily: 'Medium',
-                            ),
-                            TextWidget(
-                              text: 'ID No.: ${panau[i].image.split('.')[0]}',
-                              fontSize: 14,
-                              fontFamily: 'Medium',
-                            ),
-                            TextWidget(
-                              text: 'Description: ${panau[i].description}',
-                              fontSize: 14,
-                              fontFamily: 'Medium',
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                );
-              },
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.brown,
-                  shape: BoxShape.circle,
-                ),
-                child: Center(
-                  child: TextWidget(
-                    text: panau[i].name[0],
-                    fontSize: 18,
-                    fontFamily: 'Bold',
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            )),
-      );
-    }
-
-    for (int i = 0; i < mayapis.length; i++) {
-      markers.add(
-        Marker(
-            point: LatLng(mayapis[i].latitude, mayapis[i].longitude),
-            width: 35,
-            height: 35,
-            child: GestureDetector(
-              onTap: () {
-                showModalBottomSheet(
-                  context: context,
-                  builder: (context) {
-                    return SizedBox(
-                      height: 500,
-                      width: double.infinity,
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Center(
-                              child: Image.asset(
-                                'assets/images/Mayapis/${mayapis[i].image}',
-                                height: 210,
-                                width: 225,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            TextWidget(
-                              text: 'Name: ${mayapis[i].name}',
-                              fontSize: 18,
-                              fontFamily: 'Bold',
-                            ),
-                            const Divider(
-                              color: Colors.grey,
-                            ),
-                            TextWidget(
-                              text: 'Family: ${mayapis[i].family}',
-                              fontSize: 14,
-                              fontFamily: 'Medium',
-                            ),
-                            TextWidget(
-                              text:
-                                  'Scientific Name: ${mayapis[i].scientificName}',
-                              fontSize: 14,
-                              fontFamily: 'Medium',
-                            ),
-                            TextWidget(
-                              text: 'ID No.: ${mayapis[i].image.split('.')[0]}',
-                              fontSize: 14,
-                              fontFamily: 'Medium',
-                            ),
-                            TextWidget(
-                              text: 'Description: ${mayapis[i].description}',
-                              fontSize: 14,
-                              fontFamily: 'Medium',
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                );
-              },
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.amber,
-                  shape: BoxShape.circle,
-                ),
-                child: Center(
-                  child: TextWidget(
-                    text: mayapis[i].name[0],
-                    fontSize: 18,
-                    fontFamily: 'Bold',
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            )),
-      );
-    }
-
-    for (int i = 0; i < narig.length; i++) {
-      markers.add(
-        Marker(
-            point: LatLng(narig[i].latitude, narig[i].longitude),
-            width: 35,
-            height: 35,
-            child: GestureDetector(
-              onTap: () {
-                showModalBottomSheet(
-                  context: context,
-                  builder: (context) {
-                    return SizedBox(
-                      height: 500,
-                      width: double.infinity,
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Center(
-                              child: Image.asset(
-                                'assets/images/Narig/${narig[i].image}',
-                                height: 210,
-                                width: 225,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            TextWidget(
-                              text: 'Name: ${narig[i].name}',
-                              fontSize: 18,
-                              fontFamily: 'Bold',
-                            ),
-                            const Divider(
-                              color: Colors.grey,
-                            ),
-                            TextWidget(
-                              text: 'Family: ${narig[i].family}',
-                              fontSize: 14,
-                              fontFamily: 'Medium',
-                            ),
-                            TextWidget(
-                              text:
-                                  'Scientific Name: ${narig[i].scientificName}',
-                              fontSize: 14,
-                              fontFamily: 'Medium',
-                            ),
-                            TextWidget(
-                              text: 'ID No.: ${narig[i].image.split('.')[0]}',
-                              fontSize: 14,
-                              fontFamily: 'Medium',
-                            ),
-                            TextWidget(
-                              text: 'Description: ${narig[i].description}',
-                              fontSize: 14,
-                              fontFamily: 'Medium',
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                );
-              },
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.black,
-                  shape: BoxShape.circle,
-                ),
-                child: Center(
-                  child: TextWidget(
-                    text: narig[i].name[0],
-                    fontSize: 18,
-                    fontFamily: 'Bold',
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            )),
-      );
-    }
-
-    for (int i = 0; i < yakal.length; i++) {
-      markers.add(
-        Marker(
-            point: LatLng(yakal[i].latitude, yakal[i].longitude),
-            width: 35,
-            height: 35,
-            child: GestureDetector(
-              onTap: () {
-                showModalBottomSheet(
-                  context: context,
-                  builder: (context) {
-                    return SizedBox(
-                      height: 500,
-                      width: double.infinity,
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Center(
-                              child: Image.asset(
-                                'assets/images/Yakal Saplungan/${yakal[i].image}',
-                                height: 210,
-                                width: 225,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            TextWidget(
-                              text: 'Name: ${yakal[i].name}',
-                              fontSize: 18,
-                              fontFamily: 'Bold',
-                            ),
-                            const Divider(
-                              color: Colors.grey,
-                            ),
-                            TextWidget(
-                              text: 'Family: ${yakal[i].family}',
-                              fontSize: 14,
-                              fontFamily: 'Medium',
-                            ),
-                            TextWidget(
-                              text:
-                                  'Scientific Name: ${yakal[i].scientificName}',
-                              fontSize: 14,
-                              fontFamily: 'Medium',
-                            ),
-                            TextWidget(
-                              text: 'ID No.: ${yakal[i].image.split('.')[0]}',
-                              fontSize: 14,
-                              fontFamily: 'Medium',
-                            ),
-                            TextWidget(
-                              text: 'Description: ${yakal[i].description}',
-                              fontSize: 14,
-                              fontFamily: 'Medium',
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                );
-              },
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.purple,
-                  shape: BoxShape.circle,
-                ),
-                child: Center(
-                  child: TextWidget(
-                    text: yakal[i].name[0],
-                    fontSize: 18,
-                    fontFamily: 'Bold',
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            )),
-      );
-    }
-
-    for (int i = 0; i < guisok.length; i++) {
-      markers.add(
-        Marker(
-            point: LatLng(guisok[i].latitude, guisok[i].longitude),
-            width: 35,
-            height: 35,
-            child: GestureDetector(
-              onTap: () {
-                showModalBottomSheet(
-                  context: context,
-                  builder: (context) {
-                    return SizedBox(
-                      height: 500,
-                      width: double.infinity,
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Center(
-                              child: Image.asset(
-                                'assets/images/Quisumbing Guisok/${guisok[i].image}',
-                                height: 210,
-                                width: 225,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            TextWidget(
-                              text: 'Name: ${guisok[i].name}',
-                              fontSize: 18,
-                              fontFamily: 'Bold',
-                            ),
-                            const Divider(
-                              color: Colors.grey,
-                            ),
-                            TextWidget(
-                              text: 'Family: ${guisok[i].family}',
-                              fontSize: 14,
-                              fontFamily: 'Medium',
-                            ),
-                            TextWidget(
-                              text:
-                                  'Scientific Name: ${guisok[i].scientificName}',
-                              fontSize: 14,
-                              fontFamily: 'Medium',
-                            ),
-                            TextWidget(
-                              text: 'ID No.: ${guisok[i].image.split('.')[0]}',
-                              fontSize: 14,
-                              fontFamily: 'Medium',
-                            ),
-                            TextWidget(
-                              text: 'Description: ${guisok[i].description}',
-                              fontSize: 14,
-                              fontFamily: 'Medium',
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                );
-              },
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.teal,
-                  shape: BoxShape.circle,
-                ),
-                child: Center(
-                  child: TextWidget(
-                    text: guisok[i].name[0],
-                    fontSize: 18,
-                    fontFamily: 'Bold',
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            )),
-      );
-    }
-
-    setState(() {
-      hasLoaded = true;
-    });
-  }
+  final Completer<GoogleMapController> _controller =
+      Completer<GoogleMapController>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
-        centerTitle: true,
-        title: TextWidget(
-          text: 'Map',
-          fontSize: 18,
-          color: Colors.white,
+        appBar: AppBar(
+          backgroundColor: Colors.blue,
+          foregroundColor: Colors.white,
+          centerTitle: true,
+          title: TextWidget(
+            text: 'Map',
+            fontSize: 18,
+            color: Colors.white,
+          ),
         ),
-      ),
-      body: hasLoaded
-          ? FlutterMap(
-              options: const MapOptions(
-                initialCenter: LatLng(9.715106, 124.106846),
-                initialZoom: 15,
-              ),
-              children: [
-                TileLayer(
-                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                  userAgentPackageName: 'com.example.app',
+        body: StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance.collection('Tree').snapshots(),
+            builder:
+                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (snapshot.hasError) {
+                print('error');
+                return const Center(child: Text('Error'));
+              }
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Padding(
+                  padding: EdgeInsets.only(top: 50),
+                  child: Center(
+                      child: CircularProgressIndicator(
+                    color: Colors.black,
+                  )),
+                );
+              }
+
+              final data = snapshot.requireData;
+              return GoogleMap(
+                myLocationButtonEnabled: true,
+                myLocationEnabled: true,
+                markers: {
+                  for (int i = 0; i < data.docs.length; i++)
+                    Marker(
+                        infoWindow: InfoWindow(
+                            onTap: () {
+                              showModalBottomSheet(
+                                enableDrag: true,
+                                context: context,
+                                builder: (context) {
+                                  return SingleChildScrollView(
+                                    child: SizedBox(
+                                      height: 500,
+                                      width: double.infinity,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(15.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Center(
+                                              child: Image.network(
+                                                data.docs[i]['img'],
+                                                height: 210,
+                                                width: 225,
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            TextWidget(
+                                              text:
+                                                  'Name: ${data.docs[i]['name']}',
+                                              fontSize: 18,
+                                              fontFamily: 'Bold',
+                                            ),
+                                            const Divider(
+                                              color: Colors.grey,
+                                            ),
+                                            TextWidget(
+                                              text:
+                                                  'Family: ${data.docs[i]['family']}',
+                                              fontSize: 14,
+                                              fontFamily: 'Medium',
+                                            ),
+                                            TextWidget(
+                                              text:
+                                                  'Scientific Name: ${data.docs[i]['scientificName']}',
+                                              fontSize: 14,
+                                              fontFamily: 'Medium',
+                                            ),
+                                            TextWidget(
+                                              text:
+                                                  'Description: ${data.docs[i]['description']}',
+                                              fontSize: 14,
+                                              fontFamily: 'Medium',
+                                            ),
+                                            const SizedBox(
+                                              height: 20,
+                                            ),
+                                            Center(
+                                              child: ButtonWidget(
+                                                fontSize: 14,
+                                                height: 40,
+                                                width: 150,
+                                                color: Colors.red,
+                                                label: 'Close',
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                },
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                            title: data.docs[i]['name'],
+                            snippet: data.docs[i]['scientificName']),
+                        markerId: MarkerId(data.docs[i].id),
+                        position:
+                            LatLng(data.docs[i]['lat'], data.docs[i]['long'])),
+                },
+                mapType: MapType.normal,
+                initialCameraPosition: CameraPosition(
+                  target: LatLng(widget.lat, widget.long),
+                  zoom: 16.4746,
                 ),
-                MarkerLayer(
-                  markers: markers,
-                ),
-              ],
-            )
-          : const Center(
-              child: CircularProgressIndicator(),
-            ),
-    );
+                onMapCreated: (GoogleMapController controller) {
+                  _controller.complete(controller);
+                },
+              );
+            }));
   }
 }
