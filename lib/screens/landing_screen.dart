@@ -44,6 +44,9 @@ class _LandingScreenState extends State<LandingScreen> {
     });
 
     loadmodel();
+    setState(() {
+      hasloaded = true;
+    });
     super.initState();
   }
 
@@ -103,10 +106,6 @@ class _LandingScreenState extends State<LandingScreen> {
     }
 
     // works = jsonDecode(await rootBundle.loadString('assets/data/main.json'));
-
-    setState(() {
-      hasloaded = true;
-    });
   }
 
   String str = '';

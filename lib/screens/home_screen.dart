@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:emetms/utlis/const.dart';
 import 'package:emetms/widgets/button_widget.dart';
 import 'package:emetms/widgets/text_widget.dart';
 
@@ -65,6 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
               }
 
               final data = snapshot.requireData;
+
               return GoogleMap(
                 myLocationButtonEnabled: true,
                 myLocationEnabled: true,
@@ -152,8 +154,37 @@ class _HomeScreenState extends State<HomeScreen> {
                             title: data.docs[i]['name'],
                             snippet: data.docs[i]['scientificName']),
                         markerId: MarkerId(data.docs[i].id),
-                        position:
-                            LatLng(data.docs[i]['lat'], data.docs[i]['long'])),
+                        position: LatLng(
+                            data.docs[i]['family'] == 'Gisok Gisok'
+                                ? gisokgisok.first.latitude
+                                : data.docs[i]['family'] == 'Guijo'
+                                    ? guijo.first.latitude
+                                    : data.docs[i]['family'] ==
+                                            'Hasselt’s Panau'
+                                        ? panau.first.latitude
+                                        : data.docs[i]['family'] == 'Mayapis'
+                                            ? mayapis.first.latitude
+                                            : data.docs[i]['family'] == 'Narig'
+                                                ? narig.first.latitude
+                                                : data.docs[i]['family'] ==
+                                                        'Yakal Saplungan'
+                                                    ? yakal.first.latitude
+                                                    : guisok.first.latitude,
+                            data.docs[i]['family'] == 'Gisok Gisok'
+                                ? gisokgisok.first.longitude
+                                : data.docs[i]['family'] == 'Guijo'
+                                    ? guijo.first.longitude
+                                    : data.docs[i]['family'] ==
+                                            'Hasselt’s Panau'
+                                        ? panau.first.longitude
+                                        : data.docs[i]['family'] == 'Mayapis'
+                                            ? mayapis.first.longitude
+                                            : data.docs[i]['family'] == 'Narig'
+                                                ? narig.first.longitude
+                                                : data.docs[i]['family'] ==
+                                                        'Yakal Saplungan'
+                                                    ? yakal.first.longitude
+                                                    : guisok.first.longitude)),
                 },
                 mapType: MapType.normal,
                 initialCameraPosition: CameraPosition(
