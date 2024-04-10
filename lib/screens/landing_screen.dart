@@ -124,7 +124,6 @@ class _LandingScreenState extends State<LandingScreen> {
       str = result[0]['label'].toString().split(' ')[1];
     });
 
-    print(str);
     Navigator.pop(context);
 
     List tree = str == 'Gisok Gisok'
@@ -141,97 +140,101 @@ class _LandingScreenState extends State<LandingScreen> {
                             ? yakal
                             : guisok;
 
-    showModalBottomSheet(
-      enableDrag: true,
-      context: context,
-      builder: (context) {
-        return SingleChildScrollView(
-          child: SizedBox(
-            height: 500,
-            width: double.infinity,
-            child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Center(
-                    child: Image.file(
-                      file,
-                      height: 210,
-                      width: 225,
+    if (result[0]['confidence'] > 0.60) {
+      showModalBottomSheet(
+        enableDrag: true,
+        context: context,
+        builder: (context) {
+          return SingleChildScrollView(
+            child: SizedBox(
+              height: 500,
+              width: double.infinity,
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Center(
+                      child: Image.file(
+                        file,
+                        height: 210,
+                        width: 225,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  TextWidget(
-                    text: 'Name: ${tree.first.name}',
-                    fontSize: 18,
-                    fontFamily: 'Bold',
-                  ),
-                  const Divider(
-                    color: Colors.grey,
-                  ),
-                  TextWidget(
-                    text: 'Family: ${tree.first.family}',
-                    fontSize: 14,
-                    fontFamily: 'Medium',
-                  ),
-                  TextWidget(
-                    text: 'Scientific Name: ${tree.first.scientificName}',
-                    fontSize: 14,
-                    fontFamily: 'Medium',
-                  ),
-                  TextWidget(
-                    text: 'Description: ${tree.first.description}',
-                    fontSize: 14,
-                    fontFamily: 'Medium',
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      ButtonWidget(
-                        fontSize: 14,
-                        height: 40,
-                        width: 150,
-                        color: Colors.blue,
-                        label: 'Save to map',
-                        onPressed: () {
-                          addTree(
-                              imageURL,
-                              tree.first.name,
-                              tree.first.family,
-                              tree.first.scientificName,
-                              tree.first.description,
-                              lat,
-                              long);
-                          Navigator.pop(context);
-                          showToast('Tree added to map!');
-                        },
-                      ),
-                      ButtonWidget(
-                        fontSize: 14,
-                        height: 40,
-                        width: 150,
-                        color: Colors.red,
-                        label: 'Close',
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ],
-                  ),
-                ],
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    TextWidget(
+                      text: 'Name: ${tree.first.name}',
+                      fontSize: 18,
+                      fontFamily: 'Bold',
+                    ),
+                    const Divider(
+                      color: Colors.grey,
+                    ),
+                    TextWidget(
+                      text: 'Family: ${tree.first.family}',
+                      fontSize: 14,
+                      fontFamily: 'Medium',
+                    ),
+                    TextWidget(
+                      text: 'Scientific Name: ${tree.first.scientificName}',
+                      fontSize: 14,
+                      fontFamily: 'Medium',
+                    ),
+                    TextWidget(
+                      text: 'Description: ${tree.first.description}',
+                      fontSize: 14,
+                      fontFamily: 'Medium',
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ButtonWidget(
+                          fontSize: 14,
+                          height: 40,
+                          width: 150,
+                          color: Colors.blue,
+                          label: 'Save to map',
+                          onPressed: () {
+                            addTree(
+                                imageURL,
+                                tree.first.name,
+                                tree.first.family,
+                                tree.first.scientificName,
+                                tree.first.description,
+                                lat,
+                                long);
+                            Navigator.pop(context);
+                            showToast('Tree added to map!');
+                          },
+                        ),
+                        ButtonWidget(
+                          fontSize: 14,
+                          height: 40,
+                          width: 150,
+                          color: Colors.red,
+                          label: 'Close',
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        );
-      },
-    );
+          );
+        },
+      );
+    } else {
+      showToast('Cannot recognize image!');
+    }
   }
 
   @override
