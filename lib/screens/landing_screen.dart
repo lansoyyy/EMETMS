@@ -140,7 +140,7 @@ class _LandingScreenState extends State<LandingScreen> {
                             ? yakal
                             : guisok;
 
-    if (result[0]['confidence'] > 0.60) {
+    if (result[0]['confidence'] > 0.75) {
       showModalBottomSheet(
         enableDrag: true,
         context: context,
@@ -251,10 +251,7 @@ class _LandingScreenState extends State<LandingScreen> {
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => HomeScreen(
-                                lat: lat,
-                                long: long,
-                              )));
+                          builder: (context) => const HomeScreen()));
                     },
                     child: Container(
                       height: 250,
