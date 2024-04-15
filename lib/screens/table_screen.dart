@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emetms/utlis/const.dart';
 import 'package:emetms/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
@@ -68,18 +69,66 @@ class _TableScreenState extends State<TableScreen> {
               ),
             ),
             DataCell(
-              TextWidget(
-                text:
-                    '${speciesList[i] == 'Gisok Gisok' ? 10 : speciesList[i] == 'Guijo' ? 10 : speciesList[i] == 'Hasselt’s Panau' ? 3 : speciesList[i] == 'Mayapis' ? 10 : speciesList[i] == 'Narig' ? 10 : speciesList[i] == 'Yakal Saplungan' ? 8 : 10}',
-                fontSize: 12,
-              ),
+              StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('Tree')
+                      .where('family', isEqualTo: speciesList[i])
+                      .snapshots(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.hasError) {
+                      print(snapshot.error);
+                      return const Center(child: Text('Error'));
+                    }
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Padding(
+                        padding: EdgeInsets.only(top: 50),
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.black,
+                          ),
+                        ),
+                      );
+                    }
+
+                    final data = snapshot.requireData;
+                    return TextWidget(
+                      text:
+                          '${speciesList[i] == 'Gisok Gisok' ? data.docs.length : speciesList[i] == 'Guijo' ? data.docs.length : speciesList[i] == 'Hasselt’s Panau' ? data.docs.length : speciesList[i] == 'Mayapis' ? data.docs.length : speciesList[i] == 'Narig' ? data.docs.length : speciesList[i] == 'Yakal Saplungan' ? data.docs.length : data.docs.length}',
+                      fontSize: 12,
+                    );
+                  }),
             ),
             DataCell(
-              TextWidget(
-                text:
-                    '${((((speciesList[i] == 'Gisok Gisok' ? 10 : speciesList[i] == 'Guijo' ? 10 : speciesList[i] == 'Hasselt’s Panau' ? 3 : speciesList[i] == 'Mayapis' ? 10 : speciesList[i] == 'Narig' ? 10 : speciesList[i] == 'Yakal Saplungan' ? 8 : 10)) / 30) * 100).toStringAsFixed(2)}%',
-                fontSize: 12,
-              ),
+              StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('Tree')
+                      .where('family', isEqualTo: speciesList[i])
+                      .snapshots(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.hasError) {
+                      print(snapshot.error);
+                      return const Center(child: Text('Error'));
+                    }
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Padding(
+                        padding: EdgeInsets.only(top: 50),
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.black,
+                          ),
+                        ),
+                      );
+                    }
+
+                    final data = snapshot.requireData;
+                    return TextWidget(
+                      text:
+                          '${((((speciesList[i] == 'Gisok Gisok' ? data.docs.length : speciesList[i] == 'Guijo' ? data.docs.length : speciesList[i] == 'Hasselt’s Panau' ? data.docs.length : speciesList[i] == 'Mayapis' ? data.docs.length : speciesList[i] == 'Narig' ? data.docs.length : speciesList[i] == 'Yakal Saplungan' ? data.docs.length : data.docs.length)) / 30) * 100).toStringAsFixed(2)}%',
+                      fontSize: 12,
+                    );
+                  }),
             ),
           ])
       ]),
