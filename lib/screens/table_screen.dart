@@ -72,7 +72,7 @@ class _TableScreenState extends State<TableScreen> {
               StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
                       .collection('Tree')
-                      .where('family', isEqualTo: speciesList[i])
+                      .where('name', isEqualTo: speciesList[i])
                       .snapshots(),
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -93,8 +93,7 @@ class _TableScreenState extends State<TableScreen> {
 
                     final data = snapshot.requireData;
                     return TextWidget(
-                      text:
-                          '${speciesList[i] == 'Gisok Gisok' ? data.docs.length : speciesList[i] == 'Guijo' ? data.docs.length : speciesList[i] == 'Hasselt’s Panau' ? data.docs.length : speciesList[i] == 'Mayapis' ? data.docs.length : speciesList[i] == 'Narig' ? data.docs.length : speciesList[i] == 'Yakal Saplungan' ? data.docs.length : data.docs.length}',
+                      text: '${data.docs.length}',
                       fontSize: 12,
                     );
                   }),
@@ -103,7 +102,7 @@ class _TableScreenState extends State<TableScreen> {
               StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
                       .collection('Tree')
-                      .where('family', isEqualTo: speciesList[i])
+                      .where('name', isEqualTo: speciesList[i])
                       .snapshots(),
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -125,7 +124,7 @@ class _TableScreenState extends State<TableScreen> {
                     final data = snapshot.requireData;
                     return TextWidget(
                       text:
-                          '${((((speciesList[i] == 'Gisok Gisok' ? data.docs.length : speciesList[i] == 'Guijo' ? data.docs.length : speciesList[i] == 'Hasselt’s Panau' ? data.docs.length : speciesList[i] == 'Mayapis' ? data.docs.length : speciesList[i] == 'Narig' ? data.docs.length : speciesList[i] == 'Yakal Saplungan' ? data.docs.length : data.docs.length)) / 30) * 100).toStringAsFixed(2)}%',
+                          '${((((data.docs.length)) / 30) * 100).toStringAsFixed(2)}%',
                       fontSize: 12,
                     );
                   }),

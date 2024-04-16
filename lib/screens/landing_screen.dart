@@ -331,45 +331,7 @@ class _LandingScreenState extends State<LandingScreen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          showModalBottomSheet(
-                            context: context,
-                            builder: (context) {
-                              return SizedBox(
-                                height: 150,
-                                child: Column(
-                                  children: [
-                                    ListTile(
-                                      onTap: () {
-                                        getImageCamera('camera');
-                                      },
-                                      leading: const Icon(
-                                        Icons.camera,
-                                      ),
-                                      title: TextWidget(
-                                        text: 'Camera',
-                                        fontSize: 18,
-                                        fontFamily: 'Bold',
-                                      ),
-                                    ),
-                                    const Divider(),
-                                    ListTile(
-                                      onTap: () {
-                                        getImageCamera('gallery');
-                                      },
-                                      leading: const Icon(
-                                        Icons.image,
-                                      ),
-                                      title: TextWidget(
-                                        text: 'Gallery',
-                                        fontSize: 18,
-                                        fontFamily: 'Bold',
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                          );
+                          getImageCamera('camera');
                         },
                         child: Container(
                           height: 125,
