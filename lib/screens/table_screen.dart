@@ -33,104 +33,131 @@ class _TableScreenState extends State<TableScreen> {
           color: Colors.white,
         ),
       ),
-      body: DataTable(columns: [
-        DataColumn(
-          label: TextWidget(
-            align: TextAlign.start,
-            maxLines: 2,
-            text: 'Endangered\nTree',
-            fontFamily: 'Bold',
-            fontSize: 14,
-          ),
-        ),
-        DataColumn(
-          label: TextWidget(
-            align: TextAlign.start,
-            maxLines: 2,
-            text: 'No. of\nTrees',
-            fontFamily: 'Bold',
-            fontSize: 14,
-          ),
-        ),
-        DataColumn(
-          label: TextWidget(
-            text: 'Percentage',
-            fontSize: 14,
-            fontFamily: 'Bold',
-          ),
-        ),
-      ], rows: [
-        for (int i = 0; i < speciesList.length; i++)
-          DataRow(cells: [
-            DataCell(
-              TextWidget(
-                text: speciesList[i],
-                fontSize: 12,
+      body: StreamBuilder<QuerySnapshot>(
+          stream: FirebaseFirestore.instance.collection('Tree').snapshots(),
+          builder:
+              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.hasError) {
+              print(snapshot.error);
+              return const Center(child: Text('Error'));
+            }
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Padding(
+                padding: EdgeInsets.only(top: 50),
+                child: Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.black,
+                  ),
+                ),
+              );
+            }
+
+            final alldata = snapshot.requireData;
+            return DataTable(columns: [
+              DataColumn(
+                label: TextWidget(
+                  align: TextAlign.start,
+                  maxLines: 2,
+                  text: 'Endangered\nTree',
+                  fontFamily: 'Bold',
+                  fontSize: 14,
+                ),
               ),
-            ),
-            DataCell(
-              StreamBuilder<QuerySnapshot>(
-                  stream: FirebaseFirestore.instance
-                      .collection('Tree')
-                      .where('name', isEqualTo: speciesList[i])
-                      .snapshots(),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<QuerySnapshot> snapshot) {
-                    if (snapshot.hasError) {
-                      print(snapshot.error);
-                      return const Center(child: Text('Error'));
-                    }
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Padding(
-                        padding: EdgeInsets.only(top: 50),
-                        child: Center(
-                          child: CircularProgressIndicator(
-                            color: Colors.black,
-                          ),
-                        ),
-                      );
-                    }
-
-                    final data = snapshot.requireData;
-                    return TextWidget(
-                      text: '${data.docs.length}',
+              DataColumn(
+                label: TextWidget(
+                  align: TextAlign.start,
+                  maxLines: 2,
+                  text: 'No. of\nTrees',
+                  fontFamily: 'Bold',
+                  fontSize: 14,
+                ),
+              ),
+              DataColumn(
+                label: TextWidget(
+                  text: 'Percentage',
+                  fontSize: 14,
+                  fontFamily: 'Bold',
+                ),
+              ),
+            ], rows: [
+              for (int i = 0; i < speciesList.length; i++)
+                DataRow(cells: [
+                  DataCell(
+                    TextWidget(
+                      text: speciesList[i],
                       fontSize: 12,
-                    );
-                  }),
-            ),
-            DataCell(
-              StreamBuilder<QuerySnapshot>(
-                  stream: FirebaseFirestore.instance
-                      .collection('Tree')
-                      .where('name', isEqualTo: speciesList[i])
-                      .snapshots(),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<QuerySnapshot> snapshot) {
-                    if (snapshot.hasError) {
-                      print(snapshot.error);
-                      return const Center(child: Text('Error'));
-                    }
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Padding(
-                        padding: EdgeInsets.only(top: 50),
-                        child: Center(
-                          child: CircularProgressIndicator(
-                            color: Colors.black,
-                          ),
-                        ),
-                      );
-                    }
+                    ),
+                  ),
+                  DataCell(
+                    StreamBuilder<QuerySnapshot>(
+                        stream: FirebaseFirestore.instance
+                            .collection('Tree')
+                            .where('name', isEqualTo: speciesList[i])
+                            .snapshots(),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<QuerySnapshot> snapshot) {
+                          if (snapshot.hasError) {
+                            print(snapshot.error);
+                            return const Center(child: Text('Error'));
+                          }
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const Padding(
+                              padding: EdgeInsets.only(top: 50),
+                              child: Center(
+                                child: CircularProgressIndicator(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            );
+                          }
 
-                    final data = snapshot.requireData;
-                    return TextWidget(
-                      text:
-                          '${((((data.docs.length)) / 30) * 100).toStringAsFixed(2)}%',
-                      fontSize: 12,
-                    );
-                  }),
-            ),
-          ])
-      ]),
+                          final data = snapshot.requireData;
+                          return TextWidget(
+                            text: '${data.docs.length}',
+                            fontSize: 12,
+                          );
+                        }),
+                  ),
+                  DataCell(
+                    StreamBuilder<QuerySnapshot>(
+                      stream: FirebaseFirestore.instance
+                          .collection('Tree')
+                          .where('name', isEqualTo: speciesList[i])
+                          .snapshots(),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<QuerySnapshot> snapshot) {
+                        if (snapshot.hasError) {
+                          print(snapshot.error);
+                          return const Center(child: Text('Error'));
+                        }
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Padding(
+                            padding: EdgeInsets.only(top: 50),
+                            child: Center(
+                              child: CircularProgressIndicator(
+                                color: Colors.black,
+                              ),
+                            ),
+                          );
+                        }
+
+                        final data = snapshot.requireData;
+                        final count = data.docs.length;
+
+                        final percentage = (count / alldata.docs.length) * 100;
+
+                        return TextWidget(
+                          text: '${percentage.toStringAsFixed(2)}%',
+                          fontSize: 12,
+                        );
+                      },
+                    ),
+                  ),
+                ])
+            ]);
+          }),
     );
   }
 }
