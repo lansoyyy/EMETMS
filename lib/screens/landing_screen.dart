@@ -124,8 +124,6 @@ class _LandingScreenState extends State<LandingScreen> {
       str = result[0]['label'].toString().split(' ')[1];
     });
 
-    Navigator.pop(context);
-
     List tree = str == 'Gisok Gisok'
         ? gisokgisok
         : str == 'Guijo'
